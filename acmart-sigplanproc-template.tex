@@ -190,11 +190,39 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 \indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
 \newline
 \indent Therefore, in order to convey a complete and intuitive picture of a system more quickly than text-based methods, we developed an interactive CodeQL visualization tool for Visual Studio Code, which provides visualization functionalities for data-flow analysis of CodeQL. Given the time limit on this project, we primarily focus on the taint analysis. Other kinds of analysis will be extended in the future.
-%% Bibliography
-%\bibliography{bibfile}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{taint_part}
+  \caption{Taint Analysis Visualization. Only the necessary part of the taint flow path is shown. Orange denotes the source. Yellow denotes the data that is tainted. Red denotes the sink. Dark blue denotes the sink that is sanitized. Light blue denotes the data that is not tainted.}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{taint_full}
+  \caption{Full path of the taint flow. }
+\end{figure}
 
 
-%% Appendix
+
+\section{Overview of Approach}
+We built this visualization tool directly on top of the CodeQL Visual Studio Code extension, thanks to the fact this project is open sourced. For the visualization part, we utilized the WebView APIs provided by VSCode for rendering the UI. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{work_flow}
+  \caption{The work flow}
+\end{figure}
+
+\section{More Details about Approach}
+
+\section{Evaluation}
+
+\section{Discussion}
+
+\section{Related Work}
+
+\section{conclusion}
 
 
 \end{document}
