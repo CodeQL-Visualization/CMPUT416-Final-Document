@@ -184,35 +184,17 @@ CodeQL is a program analysis tool developed by Github Security Lab. Developers a
 \maketitle
 
 
-\section{Introduction}
-
-
-%% Acknowledgments
-\begin{acks}                            %% acks environment is optional
-                                        %% contents suppressed with 'anonymous'
-  %% Commands \grantsponsor{<sponsorID>}{<name>}{<url>} and
-  %% \grantnum[<url>]{<sponsorID>}{<number>} should be used to
-  %% acknowledge financial support and will be used by metadata
-  %% extraction tools.
-  This material is based upon work supported by the
-  \grantsponsor{GS100000001}{National Science
-    Foundation}{http://dx.doi.org/10.13039/100000001} under Grant
-  No.~\grantnum{GS100000001}{nnnnnnn} and Grant
-  No.~\grantnum{GS100000001}{mmmmmmm}.  Any opinions, findings, and
-  conclusions or recommendations expressed in this material are those
-  of the author and do not necessarily reflect the views of the
-  National Science Foundation.
-\end{acks}
-
-
+\section{Introduction and Motivation}
+CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python and JavaScript etc. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs. 
+\newline
+\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in table views.
+\newline
+\indent Therefore, in order to convey a complete and intuitive picture of a system more quickly than text-based methods, we developed an interactive CodeQL Visualization tool for Visual Studio Code, which provides visualization functionalities for data-flow analysis of CodeQL.
 %% Bibliography
 %\bibliography{bibfile}
 
 
 %% Appendix
-\appendix
-\section{Appendix}
 
-Text of appendix \ldots
 
 \end{document}
