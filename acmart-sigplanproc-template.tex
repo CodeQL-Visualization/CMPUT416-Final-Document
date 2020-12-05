@@ -143,7 +143,7 @@
 %% Note: \begin{abstract}...\end{abstract} environment must come
 %% before \maketitle command
 \begin{abstract}
-CodeQL is a program analysis tool developed by Github Security Lab. Developers and researchers can identify software vulnerabilities and bugs with CodeQL by writing powerful queries  called QL. GitHub also developed a CodeQL Visual Studio Code extension, which is an open source project written in TypeScript, utilizing the CodeQL command line tool for the analysis service. This extension currently displays the analysis results in the table view. 
+CodeQL is a program analysis tool developed by Github Security Lab. Developers and researchers can identify software vulnerabilities and bugs with CodeQL by writing powerful queries  called QL. GitHub also developed a CodeQL Visual Studio Code extension, which is an open source project written in TypeScript, utilizing the CodeQL command line tool for the analysis service. This extension currently displays the analysis results in the tabular view. 
 \newline
 \indent In this paper, we present CodeQLVis - a CodeQL visualization tool integrated in Visual Studio Code which creates intuitive graphical representations of the analysis results from CodeQL. 
 
@@ -187,7 +187,7 @@ CodeQL is a program analysis tool developed by Github Security Lab. Developers a
 \section{Introduction and Motivation}
 CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python and JavaScript etc. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs. 
 \newline
-\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in table views.
+\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
 \newline
 \indent Therefore, in order to convey a complete and intuitive picture of a system more quickly than text-based methods, we developed an interactive CodeQL Visualization tool for Visual Studio Code, which provides visualization functionalities for data-flow analysis of CodeQL.
 %% Bibliography
