@@ -237,7 +237,7 @@ There are a few tools which we have leveraged in order to make our work possible
 \newline\indent \textbf{Related Tools}. CodeQL is integral to our efforts as the program analysis tool which produces results for us to visualize. CodeQL for Visual Studio Code is cool. VS Code Debug Visualizer is also cool.
 \newline
 \newline\indent \textbf{Data Flow Visualization}. There are a number of efforts in this domain, though not necessarily applied to CodeQL nor integrated into Visual Studio Code. "Understanding and Visualizing Full Systems with
-Data Flow Tomography" outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. "VisuFlow" is a plugin developed for the Eclipse IDE that generates visualizations for static analysis performed by Soot.
+Data Flow Tomography" outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data flow paths that meet certain pre-defined criteria. "VisuFlow" is a plugin developed for the Eclipse IDE that generates visualizations for static analysis performed by Soot. While similar to our approach, their plugin does not work with CodeQL queries, and was developed for a different IDE.
 \[TODO\] 
 
 \section{Conclusion}
