@@ -187,7 +187,7 @@ CodeQL is a program analysis tool developed by Github Security Lab. Developers a
 \section{Introduction and Motivation}
 CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python, JavaScript and more. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs. 
 \newline
-\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data-flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
+\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data-flow analysis performed with CodeQL. The way they explore data-flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
 \newline
 \indent Semmle, the company behind CodeQL, has been acquired by GitHub and widespread public support for CodeQL has resulted. The popularity of this tool, and the lack of visualization support, has given us reason to explore this problem. We've narrowed our scope in this domain to visualizing dataflow analysis, particularly as it pertains to taint-flow tracking. 
 \newline
@@ -196,13 +196,13 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{taint_part}
-  \caption{Taint Analysis Visualization. Only the necessary part of the taint flow path is shown. Orange denotes the source. Yellow denotes the data that is tainted. Red denotes the sink. Dark blue denotes the sink that is sanitized. Light blue denotes the data that is not tainted.}
+  \caption{Taint Analysis Visualization. Only the necessary part of the taint-flow path is shown. Orange denotes the source. Yellow denotes the data that is tainted. Red denotes the sink. Dark blue denotes the sink that is sanitized. Light blue denotes the data that is not tainted.}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{taint_full}
-  \caption{Full path of the taint flow. }
+  \caption{Full path of the taint-flow. }
 \end{figure}
 
 \section{Background}
@@ -237,27 +237,27 @@ Thanks to the fact that CodeQL VSCode extension is open sourced, we built our vi
 The rendering part of the visualization tool is running on the WebView infrastructure of Visual Studio Code. We use React.js framework to build the front-end of CodeQLVis. TypeScript library hediet/visualization is used as the rendering infrastructure for the graphs. Websocket infrastructure enables the back-end to send analysis results to the front-end for rendering. 
 
 \section{Evaluation}
-Due to the nature of this project, we only examined whether CodeQLVis generates correct taint flow graphs. Therefore, we tested CodeQLVis with different code examples from the official CodeQL documentation and compared our taint flow graphs with the CodeQL analysis results through manual inspections. In particular, we ask the following questions. 
+Due to the nature of this project, we only examined whether CodeQLVis generates correct taint-flow graphs. Therefore, we tested CodeQLVis with different code examples from the official CodeQL documentation and compared our taint-flow graphs with the CodeQL analysis results through manual inspections. In particular, we ask the following questions. 
 \newline
 \newline
-\textbf{5.1. Are the roles of nodes on taint flow graphs correctly labeled? }
+\textbf{5.1. Are the roles of nodes on taint-flow graphs correctly labeled? }
 \newline
 Nodes on the visualization graphs have their roles - \textbf{Source, Sink, Sanitizer, Tainted Variable and Untainted Variable}. CodeQLVis should not label any node in an incorrect role. 
 \newline
 \newline
-\textbf{5.2. Are there any missing taint flow paths? }
+\textbf{5.2. Are there any missing taint-flow paths? }
 \newline
-CodeQLVis should display all the taint flow paths identified by CodeQL.
-\newline
-\newline
-\textbf{5.3. Are there any redundant taint flow paths? }
-\newline
-CodeQLVis should not display any false taint flow path.
+CodeQLVis should display all the taint-flow paths identified by CodeQL.
 \newline
 \newline
-\textbf{5.4. Are the nodes on the taint flow path in correct order? }
+\textbf{5.3. Are there any redundant taint-flow paths? }
 \newline
-CodeQLVis should display the nodes in the exact order in their taint flow paths as the analysis results generated by CodeQL.
+CodeQLVis should not display any false taint-flow path.
+\newline
+\newline
+\textbf{5.4. Are the nodes on the taint-flow path in correct order? }
+\newline
+CodeQLVis should display the nodes in the exact order in their taint-flow paths as the analysis results generated by CodeQL.
 \newline
 \newline
 We observed no contradictions between our visualization graphs and CodeQL analysis results. 
@@ -266,17 +266,14 @@ CodeQLVis is the first visualization tool for CodeQL. It gives an intuitive way 
 \newline
 \indent However, we admit that this tool is not very complete limited by the time constraint and there is a huge space to improve. 
 \newline
-\indent The graphs can be more interactive. Users will be able to navigate between the code snippets by clicking on the nodes on the visualization graphs. Also, the styles of the visualization can be richer by replacing the current visualization library we are using by a more powerful one. At this moment, CodeQLVis only supports taint analysis. More data flow analyses can be extended into CodeQLVis in the future. 
+\indent The graphs can be more interactive. Users will be able to navigate between the code snippets by clicking on the nodes on the visualization graphs. Also, the styles of the visualization can be richer by replacing the current visualization library we are using by a more powerful one. At this moment, CodeQLVis only supports taint analysis. More data-flow analyses can be extended into CodeQLVis in the future. 
 \section{Related Work}
 \textcolor{red}{Probably get rid of the related tools bit. Everything we could say here fits better in the background. Expand Data Flow Visualization section such that each entry gets it's own bolded section.\newline}
-There are a few tools which we have leveraged in order to make our work possible. In addition, there have been some taint flow visualization efforts using other static analysis tools that we would like to highlight.
-\newline
-\newline
-\indent \textbf{Related Tools}. CodeQL is integral to our efforts as the program analysis tool which produces results for us to visualize. CodeQL for Visual Studio Code is cool. VS Code Debug Visualizer is also cool.
-\newline
-\newline
-\indent \textbf{Data Flow Visualization}. There are a number of efforts in this domain, though not necessarily applied to CodeQL nor integrated into Visual Studio Code. "Understanding and Visualizing Full Systems with
-Data Flow Tomography" outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data flow paths that meet certain pre-defined criteria. "VisuFlow" is a plugin developed for the Eclipse IDE that generates visualizations for static analysis performed by Soot. While similar to our approach, their plugin does not work with CodeQL queries, and was developed for a different IDE.
+There has been a wealth of work done in the space of visualizing data-flow analysis, which can be considered a superset of taint-flow analysis. We highlight some related data-flow visualization efforts. There has been less work specifically on visualizing taint-flow, so we more thoroughly discuss efforts in this specific domain.
+\newline\newline
+\indent \textbf{"Understanding and Visualizing Full Systems with Data Flow Tomography"}\cite{10.1145/1353535.1346308} outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data-flow paths that meet certain pre-defined criteria.
+\newline\newline
+\indent \textbf {"VisuFlow"} is a plugin developed for the Eclipse IDE that generates visualizations for static analysis performed by Soot. While similar to our approach, their plugin does not work with CodeQL queries, and was developed for a different IDE.
 \[TODO\] 
 
 \section{Conclusion}
@@ -286,5 +283,7 @@ We have shown a possible route to extend CodeQL for Visual Studio Code, offering
 \indent
 This proof of concept shows promise; though, as we have discussed, the limitations are numerous and obvious at this stage. It is our opinion that it will be possible to refine our approach in order to make CodeQL more accessible and intuitive to use for developers regardless of their potential lack of foundational knowledge in static analysis.
 \[TODO\]
+
+\bibliography{codeql-vis-refs}
 
 \end{document}
