@@ -187,7 +187,7 @@ CodeQL is a program analysis tool developed by Github Security Lab. Developers a
 \section{Introduction and Motivation}
 CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python, JavaScript and more. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs. 
 \newline
-\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
+\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data-flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
 \newline
 \indent Therefore, in order to convey a complete and intuitive picture of a system more quickly than text-based methods, we developed an interactive CodeQL visualization tool for Visual Studio Code, which provides visualization functionalities for data-flow analysis of CodeQL. Given the time limit on this project, we primarily focus on the taint analysis. Other kinds of analysis will be extended in the future.
 
@@ -208,8 +208,9 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 
 
 \section{Overview}
-We built this visualization tool directly on top of the CodeQL Visual Studio Code extension, thanks to the fact this project is open sourced. For the visualization part, we utilized the WebView APIs provided by VSCode for rendering the UI.
-\[TODO\]
+Thanks to the fact that CodeQL VSCode extension is open sourced, we built our visualization tool by extending this existing CodeQL extension. For the visualization part, we utilized the WebView APIs provided by VSCode and visualization libraries available for rendering the UI. 
+\newline
+\indent CodeQLVis will be provided as an alternative to CodeQL VSCode extension's default way of redering the results in tabular view. Users can easily switch between using the default or CodeQLVis. More details of the implementation of CodeQLVis will be described in the following section.
 
 \begin{figure}[h]
   \centering
