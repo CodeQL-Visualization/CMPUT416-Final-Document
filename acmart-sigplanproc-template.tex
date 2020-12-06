@@ -234,7 +234,7 @@ Thanks to the fact that CodeQL VSCode extension is open sourced, we built our vi
 \subsection{Queries to Graphs}
 \[TODO\] 
 \subsection{Rendering Results}
-\[TODO\] 
+The rendering part of the visualization tool is running on the WebView infrastructure of Visual Studio Code. We use React.js framework to build the front-end of CodeQLVis. TypeScript library hediet/visualization is used as the rendering infrastructure for the graphs. Websocket infrastructure enables the back-end to send analysis results to the front-end for rendering. 
 
 \section{Evaluation}
 Due to the nature of this project, we only examined whether CodeQLVis generates correct taint flow graphs. Therefore, we tested CodeQLVis with different code examples from the official CodeQL documentation and compared our taint flow graphs with the CodeQL analysis results through manual inspections. In particular, we ask the following questions. 
