@@ -189,7 +189,7 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 \newline
 \indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data flow analysis performed with CodeQL. The way they explore data flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
 \newline
-\indent Therefore, in order to convey a complete and intuitive picture of a system more quickly than text-based methods, we developed an interactive CodeQL visualization tool for Visual Studio Code, which provides visualization functionalities for data-flow analysis of CodeQL. Given the time limit on this project, we primarily focus on the taint analysis. Other kinds of analysis will be extended in the future.
+\indent Semmle, the company behind CodeQL, has been acquired by GitHub and widespread public support for CodeQL has resulted. The popularity of this tool, and the lack of visualization support, has given us reason to explore this problem. We've narrowed our scope in this domain to visualizing dataflow analysis, particularly as it pertains to taint-flow tracking. Therefore, in order to convey a complete and intuitive picture of a system more quickly than text-based methods, we have extended the CodeQL for Visual Studio Code extension to support taint-flow graph visualizations.
 
 \begin{figure}[h]
   \centering
@@ -204,8 +204,16 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 \end{figure}
 
 \section{Background}
-\[TODO\]
-
+\textcolor{red}{We'll probably want to extend this section with any bits of terminology that we use later on. If we need to add a third section for another foundational element, we can do that as well.\newline}
+Our work is heavily dependent upon the static analysis tool CodeQL, as well as the framework for Visual Studio Code extensions. As such, we will provide a brief introduction to both of these to better contextualize our artifact.
+\subsection{CodeQL}
+CodeQL is a tool for performing static analysis that transforms code into queryable relational databases. Database queries are then written in the CodeQL language to retrieve certain properties about the code that the database was derived from. This approach makes CodeQL incredibly fast, though the free-form nature of database queries means that it can be difficult to know exactly what format the data will have when retrieved.
+\newline
+\indent Two queries with the same semantic meaning can retrieve sets of data that are superficially different. As a result, there are efforts underway to produce libraries of pre-defined queries to help users look for common vulnerabilities or other issues in their code-base.
+\subsection{Visual Studio Code Extensions}
+Visual Studio Code extensions are in-editor tools that are created by their community of users. Visual Studio Code, often abbreviated to VS Code, offers a powerful Extension API for this purpose. Extensions are written in JavaScript or TypeScript and can modify almost any aspect of VS Code. Features such us simple editor themes, all the way to adding support for self-developed programming languages is possible.
+\newline
+\indent Of particular interest for our purposes are VS Code Webviews. Where an extension that has been limited to the Extensions API are limited to modifying existing elements of the editor, the Webview API provides an opportunity to render interactive HTML in order to create entirely new functionality within the editor. CodeQL for Visual Studio Code, for example, uses this API to render query results tables.
 
 \section{Overview}
 We built this visualization tool directly on top of the CodeQL Visual Studio Code extension, thanks to the fact this project is open sourced. For the visualization part, we utilized the WebView APIs provided by VSCode for rendering the UI.
@@ -232,17 +240,22 @@ We built this visualization tool directly on top of the CodeQL Visual Studio Cod
 \[TODO\]
 
 \section{Related Work}
+\textcolor{red}{Probably get rid of the related tools bit. Everything we could say here fits better in the background. Expand Data Flow Visualization section such that each entry gets it's own bolded section.\newline}
 There are a few tools which we have leveraged in order to make our work possible. In addition, there have been some taint flow visualization efforts using other static analysis tools that we would like to highlight.
 \newline
-\newline\indent \textbf{Related Tools}. CodeQL is integral to our efforts as the program analysis tool which produces results for us to visualize. CodeQL for Visual Studio Code is cool. VS Code Debug Visualizer is also cool.
 \newline
-\newline\indent \textbf{Data Flow Visualization}. There are a number of efforts in this domain, though not necessarily applied to CodeQL nor integrated into Visual Studio Code. "Understanding and Visualizing Full Systems with
+\indent \textbf{Related Tools}. CodeQL is integral to our efforts as the program analysis tool which produces results for us to visualize. CodeQL for Visual Studio Code is cool. VS Code Debug Visualizer is also cool.
+\newline
+\newline
+\indent \textbf{Data Flow Visualization}. There are a number of efforts in this domain, though not necessarily applied to CodeQL nor integrated into Visual Studio Code. "Understanding and Visualizing Full Systems with
 Data Flow Tomography" outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data flow paths that meet certain pre-defined criteria. "VisuFlow" is a plugin developed for the Eclipse IDE that generates visualizations for static analysis performed by Soot. While similar to our approach, their plugin does not work with CodeQL queries, and was developed for a different IDE.
 \[TODO\] 
 
 \section{Conclusion}
+\textcolor{red}{Expand this.\newline}
 We have shown a possible route to extend CodeQL for Visual Studio Code, offering a visual representation of data that is otherwise typically presented in tabular format. This optional visualization has been further broken down into different levels of granularity per a user's preference for a given query. Our approach leverages the source extension such that we can interpret taint-flow analysis queries of specific formats, subtly modifying queries before execution where necessary.
-\newline\indent
+\newline
+\indent
 This proof of concept shows promise; though, as we have discussed, the limitations are numerous and obvious at this stage. It is our opinion that it will be possible to refine our approach in order to make CodeQL more accessible and intuitive to use for developers regardless of their potential lack of foundational knowledge in static analysis.
 \[TODO\]
 
