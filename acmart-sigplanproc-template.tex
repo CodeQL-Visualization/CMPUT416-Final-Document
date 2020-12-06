@@ -203,10 +203,13 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
   \caption{Full path of the taint flow. }
 \end{figure}
 
+\section{Background}
+\[TODO\]
 
 
-\section{Overview of Approach}
-We built this visualization tool directly on top of the CodeQL Visual Studio Code extension, thanks to the fact this project is open sourced. For the visualization part, we utilized the WebView APIs provided by VSCode for rendering the UI. \[To be completed\] \dots
+\section{Overview}
+We built this visualization tool directly on top of the CodeQL Visual Studio Code extension, thanks to the fact this project is open sourced. For the visualization part, we utilized the WebView APIs provided by VSCode for rendering the UI.
+\[TODO\]
 
 \begin{figure}[h]
   \centering
@@ -214,15 +217,33 @@ We built this visualization tool directly on top of the CodeQL Visual Studio Cod
   \caption{The work flow}
 \end{figure}
 
-\section{More Details about Approach}
-\[To be completed\] 
-\section{Evaluation}
-\[To be completed\] 
-\section{Discussion}
-\[To be completed\] 
-\section{Related Work}
-\[To be completed\] 
-\section{Conclusion}
+\section{Approach}
+\subsection{CodeQL Queries}
+\[TODO\] 
+\subsection{Queries to Graphs}
+\[TODO\] 
+\subsection{Rendering Results}
+\[TODO\] 
 
+\section{Evaluation}
+\[TODO\] 
+
+\section{Discussion}
+\[TODO\]
+
+\section{Related Work}
+There are a few tools which we have leveraged in order to make our work possible. In addition, there have been some taint flow visualization efforts using other static analysis tools that we would like to highlight.
+\newline
+\newline\indent \textbf{Related Tools}. CodeQL is integral to our efforts as the program analysis tool which produces results for us to visualize. CodeQL for Visual Studio Code is cool. VS Code Debug Visualizer is also cool.
+\newline
+\newline\indent \textbf{Data Flow Visualization}. There are a number of efforts in this domain, though not necessarily applied to CodeQL nor integrated into Visual Studio Code. "Understanding and Visualizing Full Systems with
+Data Flow Tomography" outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. "VisuFlow" is a plugin developed for the Eclipse IDE that generates visualizations for static analysis performed by Soot.
+\[TODO\] 
+
+\section{Conclusion}
+We have shown a possible route to extend CodeQL for Visual Studio Code, offering a visual representation of data that is otherwise typically presented in tabular format. This optional visualization has been further broken down into different levels of granularity per a user's preference for a given query. Our approach leverages the source extension such that we can interpret taint-flow analysis queries of specific formats, subtly modifying queries before execution where necessary.
+\newline\indent
+This proof of concept shows promise; though, as we have discussed, the limitations are numerous and obvious at this stage. It is our opinion that it will be possible to refine our approach in order to make CodeQL more accessible and intuitive to use for developers regardless of their potential lack of foundational knowledge in static analysis.
+\[TODO\]
 
 \end{document}
