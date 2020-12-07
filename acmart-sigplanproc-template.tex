@@ -62,21 +62,21 @@
 
 %% For drawing graphs
 \usepackage{tikz}
-\usetikzlibrary{automata, positioning}
+\usetikzlibrary{automata, positioning, shapes, fit}
 
 \begin{document}
 
 %% Title information
 \title{Visualizing CodeQL Queries in Visual Studio Code}         %% [Short Title] is optional;
-                                        %% when present, will be used in
-                                        %% header instead of Full Title.
+%% when present, will be used in
+%% header instead of Full Title.
 %\titlenote{with title note}             %% \titlenote is optional;
-                                        %% can be repeated if necessary;
-                                        %% contents suppressed with 'anonymous'
+%% can be repeated if necessary;
+%% contents suppressed with 'anonymous'
 %\subtitle{Subtitle}                     %% \subtitle is optional
 %\subtitlenote{with subtitle note}       %% \subtitlenote is optional;
-                                        %% can be repeated if necessary;
-                                        %% contents suppressed with 'anonymous'
+%% can be repeated if necessary;
+%% contents suppressed with 'anonymous'
 
 
 %% Author information
@@ -92,7 +92,7 @@
 %% Author with single affiliation.
 \author{Jacob Skitsko}
 %\authornote{with author1 note}          %% \authornote is optional;
-                                        %% can be repeated if necessary
+%% can be repeated if necessary
 \orcid{nnnn-nnnn-nnnn-nnnn}             %% \orcid is optional
 \affiliation{
   %\position{Position1}
@@ -109,7 +109,7 @@
 %% Author with two affiliations and emails.
 \author{Robert MacGillivray}
 %\authornote{with author2 note}          %% \authornote is optional;
-                                        %% can be repeated if necessary
+%% can be repeated if necessary
 %\orcid{nnnn-nnnn-nnnn-nnnn}             %% \orcid is optional
 \affiliation{
   %\position{Position2a}
@@ -126,7 +126,7 @@
 %% Author with two affiliations and emails.
 \author{Cijie Xia}
 %\authornote{with author2 note}          %% \authornote is optional;
-                                        %% can be repeated if necessary
+%% can be repeated if necessary
 %\orcid{nnnn-nnnn-nnnn-nnnn}             %% \orcid is optional
 \affiliation{
   %\position{Position2a}
@@ -146,9 +146,9 @@
 %% Note: \begin{abstract}...\end{abstract} environment must come
 %% before \maketitle command
 \begin{abstract}
-CodeQL is a program analysis tool developed by Semmle. Developers and researchers can identify software vulnerabilities and bugs with CodeQL by writing queries in a language called QL. They have also developed CodeQL for Visual Studio Code, which is an open source Visual Studio Code extension written in TypeScript, utilizing CodeQL libraries for analysis. This extension currently displays the analysis results in the tabular view. 
-\newline
-\indent In this paper, we present CodeQLVis - a CodeQL visualization tool integrated in Visual Studio Code which creates intuitive graphical representations of the analysis results from CodeQL. 
+  CodeQL is a program analysis tool developed by Semmle. Developers and researchers can identify software vulnerabilities and bugs with CodeQL by writing queries in a language called QL. They have also developed CodeQL for Visual Studio Code, which is an open source Visual Studio Code extension written in TypeScript, utilizing CodeQL libraries for analysis. This extension currently displays the analysis results in the tabular view.
+  \newline
+  \indent In this paper, we present CodeQLVis - a CodeQL visualization tool integrated in Visual Studio Code which creates intuitive graphical representations of the analysis results from CodeQL.
 
 \end{abstract}
 
@@ -156,18 +156,18 @@ CodeQL is a program analysis tool developed by Semmle. Developers and researcher
 %% 2012 ACM Computing Classification System (CSS) concepts
 %% Generate at 'http://dl.acm.org/ccs/ccs.cfm'.
 \begin{CCSXML}
-<ccs2012>
-<concept>
-<concept_id>10011007.10011006.10011008</concept_id>
-<concept_desc>Software and its engineering~General programming languages</concept_desc>
-<concept_significance>500</concept_significance>
-</concept>
-<concept>
-<concept_id>10003456.10003457.10003521.10003525</concept_id>
-<concept_desc>Social and professional topics~History of programming languages</concept_desc>
-<concept_significance>300</concept_significance>
-</concept>
-</ccs2012>
+  <ccs2012>
+  <concept>
+  <concept_id>10011007.10011006.10011008</concept_id>
+  <concept_desc>Software and its engineering~General programming languages</concept_desc>
+  <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+  <concept_id>10003456.10003457.10003521.10003525</concept_id>
+  <concept_desc>Social and professional topics~History of programming languages</concept_desc>
+  <concept_significance>300</concept_significance>
+  </concept>
+  </ccs2012>
 \end{CCSXML}
 
 \ccsdesc[500]{Software and its engineering~General programming languages}
@@ -188,11 +188,11 @@ CodeQL is a program analysis tool developed by Semmle. Developers and researcher
 
 
 \section{Introduction and Motivation}
-CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python, JavaScript and more. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs. 
+CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python, JavaScript and more. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs.
 \newline
 \indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data-flow analysis performed with CodeQL. The way they explore data-flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
 \newline
-\indent Semmle, the company behind CodeQL, was acquired by GitHub in 2019 and there has been widespread public support for CodeQL's novel approach to static analysis \cite{Semmle_GitHub}. The popularity of this tool, and the lack of visualization support, has given us reason to explore this problem. We've narrowed our scope in this domain to visualizing data-flow analysis, particularly as it pertains to taint-flow tracking. 
+\indent Semmle, the company behind CodeQL, was acquired by GitHub in 2019 and there has been widespread public support for CodeQL's novel approach to static analysis \cite{Semmle_GitHub}. The popularity of this tool, and the lack of visualization support, has given us reason to explore this problem. We've narrowed our scope in this domain to visualizing data-flow analysis, particularly as it pertains to taint-flow tracking.
 \newline
 \indent Therefore, in order to convey a complete and intuitive picture of a system more quickly than text-based methods, we have extended the CodeQL for Visual Studio Code extension to support taint-flow graph visualizations.
 
@@ -253,19 +253,32 @@ Our approach is to make multiple CodeQL queries derived from the original query 
     \node[] (u2) [below = of v2] {$\vdots$};
     \node[state] (t1) [below = 6cm of s1] {$t_1$};
     \node[state] (t2) [below = 6cm of s2] {$t_2$};
+
+    \node[draw,densely dotted,fit=(s1) (v1) (t1)] {};
+    \node[draw,densely dotted,fit=(s2) (v2)] {};
+    \node[draw,loosely dashed,fit=(s2) (v2) (t2)] {};
+
+    \node[below = of t2, xshift=-0.75cm] {$
+        \begin{matrix}
+          s_1,s_2: & \text{source nodes}    \\
+          v:       & \text{sanitizing node} \\
+          t_1:     & \text{tainted sink}    \\
+          t_2:     & \text{untainted sink}  \\
+        \end{matrix}
+      $};
     \path[->]
     (s1) edge (v1)
     (v1) edge [shorten <= 5pt] (t1)
     (s2) edge (u1)
     (u1) edge [shorten <= 5pt] (v2)
-    (v2) edge (u2)
-    (u2) edge [shorten <= 5pt] (t2)
-
+    (v2) edge [dashed] (u2)
+    (u2) edge [shorten <= 5pt,dashed] (t2)
     ;
   \end{tikzpicture}
-  \caption{TODO}
+  \caption{Query diagram}
   \label{queries}
 \end{figure}
+This figure represents an example where taint flows from the source $s_1$ to the sink $t_1$, but taint flow from the source $s_2$ is blocked by $v$ before it reaches the sink $t_2$. The dotted box around $s_1,t_1$ represents our first query. The dashed box around $s_2,v,t_2$ represents our second query. The dot-dashed box around $s_2,v$ represents our third query. These queries gives us the information for where taint has reached sinks, where it could have reached a sink if it had not been sanitized (by $v$), and where the taint was sanitized.
 
 \subsection{Queries to Graphs}
 Once we have obtained information from our queries we can construct a graph that represents how taint flows. In the future, this graph can be adapted to various styles of visualization - the same underlying graph can be used to render different visualizations.
@@ -280,12 +293,12 @@ The rendering part of the visualization tool is running on the Webview infrastru
 \indent We have also written some support classes and modified existing classes to better represent our tool and provide a smooth in-editor user experience. These classes offer some control over the state of the extension, preventing the user from performing actions that may otherwise cause instability.
 
 \section{Evaluation}
-Due to the nature of this project, we only examined whether CodeQLVis generates correct taint-flow graphs. Therefore, we tested CodeQLVis with different code examples from the official CodeQL documentation and compared our taint-flow graphs with the CodeQL analysis results through manual inspections. In particular, we ask the following questions. 
+Due to the nature of this project, we only examined whether CodeQLVis generates correct taint-flow graphs. Therefore, we tested CodeQLVis with different code examples from the official CodeQL documentation and compared our taint-flow graphs with the CodeQL analysis results through manual inspections. In particular, we ask the following questions.
 \newline
 \newline
 \textbf{5.1. Are the roles of nodes on taint-flow graphs correctly labeled? }
 \newline
-Nodes on the visualization graphs have their roles - \textbf{Source, Sink, Sanitizer, Tainted Variable and Untainted Variable}. CodeQLVis should not label any node in an incorrect role. 
+Nodes on the visualization graphs have their roles - \textbf{Source, Sink, Sanitizer, Tainted Variable and Untainted Variable}. CodeQLVis should not label any node in an incorrect role.
 \newline
 \newline
 \textbf{5.2. Are there any missing taint-flow paths? }
@@ -303,7 +316,7 @@ CodeQLVis should not display any false taint-flow path.
 CodeQLVis should display the nodes in the exact order in their taint-flow paths as the analysis results generated by CodeQL.
 \newline
 \newline
-We observed no contradictions between our visualization graphs and CodeQL analysis results. 
+We observed no contradictions between our visualization graphs and CodeQL analysis results.
 
 \section{Future Work}
 CodeQLVis is the first visualization tool for CodeQL that does not rely on textual or tabular representation. It provides intuitive means of understanding the analysis results generated by CodeQL. Also, it is integrated into the existing CodeQL for Visual Studio Code extension, so developers can benefit from this tool in conjunction with existing methods. However, we admit that this tool has room for a number of improvements and additional features. There is a large space of possibilities for future development efforts.
@@ -319,7 +332,7 @@ There has been a wealth of work done in the space of visualizing data-flow analy
 \indent \textbf{"Understanding and Visualizing Full Systems with Data Flow Tomography"} \cite{10.1145/1353535.1346308} outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data-flow paths that meet certain pre-defined criteria.
 \newline\newline
 \indent \textbf {VisuFlow} \cite{10.1145/3183440.3183470} is a plugin developed for Eclipse that generates visualizations for static analysis performed by Soot. While similar to our work, and interesting as a proof-of-concept, their plugin operates in a different context using a different engine for analysis.
-\[TODO\] 
+\[TODO\]
 
 \section{Conclusion}
 \textcolor{red}{Expand this.\newline}
