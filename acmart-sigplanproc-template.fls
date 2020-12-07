@@ -466,6 +466,9 @@ INPUT /home/jskit/Documents/CodeQL-Visualization/CMPUT416-Final-Document/taint_p
 INPUT /home/jskit/Documents/CodeQL-Visualization/CMPUT416-Final-Document/taint_full.png
 INPUT /home/jskit/Documents/CodeQL-Visualization/CMPUT416-Final-Document/taint_full.png
 INPUT /home/jskit/Documents/CodeQL-Visualization/CMPUT416-Final-Document/taint_full.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/libertine/LinLibertineTI-tlf-t1.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/libertine/LinLibertineTI-tlf-t1.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/libertine/LinLibertineTI-tlf-t1--base.tfm
 INPUT /home/jskit/Documents/CodeQL-Visualization/CMPUT416-Final-Document/large_taint_full.png
 INPUT /home/jskit/Documents/CodeQL-Visualization/CMPUT416-Final-Document/large_taint_full.png
 INPUT /home/jskit/Documents/CodeQL-Visualization/CMPUT416-Final-Document/large_taint_full.png
