@@ -1,0 +1,124 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{6}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{de~Moor}{de~Moor}{2019}]%
+        {Semmle_GitHub}
+\bibfield{author}{\bibinfo{person}{Oege de Moor}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Securing software together: GitHub +
+  Semmle}}.
+\newblock
+\urldef\tempurl%
+\url{https://blog.semmle.com/secure-software-github-semmle/}
+\showURL{%
+Retrieved December 6, 2020 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Do, Kr\"{u}ger, Hill, Ali, and Bodden}{Do
+  et~al\mbox{.}}{2018}]%
+        {10.1145/3183440.3183470}
+\bibfield{author}{\bibinfo{person}{Lisa Nguyen~Quang Do},
+  \bibinfo{person}{Stefan Kr\"{u}ger}, \bibinfo{person}{Patrick Hill},
+  \bibinfo{person}{Karim Ali}, {and} \bibinfo{person}{Eric Bodden}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{VISUFLOW: A Debugging Environment for Static
+  Analyses}. In \bibinfo{booktitle}{\emph{Proceedings of the 40th International
+  Conference on Software Engineering: Companion Proceeedings}} (Gothenburg,
+  Sweden) \emph{(\bibinfo{series}{ICSE '18})}. \bibinfo{publisher}{Association
+  for Computing Machinery}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{89–92}.
+\newblock
+\showISBNx{9781450356633}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3183440.3183470}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{GitHub}{GitHub}{2020}]%
+        {GitHub_SecurtyLab_CodeQL}
+\bibfield{author}{\bibinfo{person}{GitHub}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{CodeQL for research}}.
+\newblock
+\urldef\tempurl%
+\url{https://securitylab.github.com/tools/codeql}
+\showURL{%
+Retrieved December 6, 2020 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Mysore, Mazloom, Agrawal, and Sherwood}{Mysore
+  et~al\mbox{.}}{2008}]%
+        {10.1145/1353535.1346308}
+\bibfield{author}{\bibinfo{person}{Shashidhar Mysore}, \bibinfo{person}{Bita
+  Mazloom}, \bibinfo{person}{Banit Agrawal}, {and} \bibinfo{person}{Timothy
+  Sherwood}.} \bibinfo{year}{2008}\natexlab{}.
+\newblock \showarticletitle{Understanding and Visualizing Full Systems with
+  Data Flow Tomography}.
+\newblock \bibinfo{journal}{\emph{SIGOPS Oper. Syst. Rev.}}
+  \bibinfo{volume}{42}, \bibinfo{number}{2} (\bibinfo{date}{March}
+  \bibinfo{year}{2008}), \bibinfo{pages}{211–221}.
+\newblock
+\showISSN{0163-5980}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/1353535.1346308}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Semmle}{Semmle}{[n.d.]}]%
+        {Semmle_LGTM}
+\bibfield{author}{\bibinfo{person}{Semmle}.} \bibinfo{year}{[n.d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{About LGTM}}.
+\newblock
+\urldef\tempurl%
+\url{https://lgtm.com/help/lgtm/about-lgtm}
+\showURL{%
+Retrieved December 6, 2020 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Semmle}{Semmle}{2020}]%
+        {Semmle_CodeQL_About}
+\bibfield{author}{\bibinfo{person}{Semmle}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{About CodeQL}}.
+\newblock
+\urldef\tempurl%
+\url{https://help.semmle.com/codeql/about-codeql.html}
+\showURL{%
+Retrieved December 6, 2020 from \tempurl}
+
+
+\end{thebibliography}

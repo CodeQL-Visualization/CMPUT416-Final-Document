@@ -209,8 +209,6 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 \end{figure}
 
 \section{Background}
-\textcolor{red}{We'll probably want to extend this section with any bits of terminology that we use later on. If we need to add a third section for another foundational element, we can do that as well.\newline}
-Our work is heavily dependent upon the static analysis tool CodeQL, as well as the framework for Visual Studio Code extensions. As such, we will provide a brief introduction to both of these to better contextualize our artifact.
 
 \subsection{CodeQL}
 CodeQL is a tool for performing static analysis that transforms code into queryable relational databases \cite{Semmle_CodeQL_About}. Database queries are then written in the QL language to retrieve certain properties about the code that the database was derived from. This approach makes CodeQL incredibly fast, though the powerful and flexible nature of database queries means that it can be difficult to know exactly what data will have been retrieved and thus, how to visualize it, ahead of time.
@@ -340,7 +338,8 @@ There has been a wealth of work done in the space of visualizing data-flow analy
 \indent \textbf{"Understanding and Visualizing Full Systems with Data Flow Tomography"} \cite{10.1145/1353535.1346308} outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data-flow paths that meet certain pre-defined criteria.
 \newline\newline
 \indent \textbf {VisuFlow} \cite{10.1145/3183440.3183470} is a plugin developed for Eclipse that generates visualizations for static analysis performed by Soot. While similar to our work, and interesting as a proof-of-concept, their plugin operates in a different context using a different engine for analysis.
-\[TODO\]
+\newline\newline
+\indent \textbf {CodeSonar} is a commercial program analysis tool developed by GrammaTech, Inc. It supports taint analysis visualization for serveral languages. It can be intergrated into Eclipse, IDEA and Android Studio IDE. However, this product is not free to use so we cannot make much comments on it.
 
 \section{Conclusion}
 \textcolor{red}{Expand this.\newline}

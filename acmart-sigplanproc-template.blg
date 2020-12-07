@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: acmart-sigplanproc-template.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: codeql-vis-refs.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty organization in Semmle_GitHub
+Warning--empty organization in GitHub_SecurtyLab_CodeQL
+Warning--empty year in Semmle_LGTM
+Warning--empty organization in Semmle_LGTM
+Warning--empty organization in Semmle_CodeQL_About
+You've used 6 entries,
+            5959 wiz_defined-function locations,
+            1372 strings with 15809 characters,
+and the built_in function-call counts, 5733 in all, are:
+= -- 661
+> -- 195
+< -- 0
++ -- 58
+- -- 68
+* -- 402
+:= -- 615
+add.period$ -- 26
+call.type$ -- 6
+change.case$ -- 37
+chr.to.int$ -- 6
+cite$ -- 11
+duplicate$ -- 498
+empty$ -- 338
+format.name$ -- 76
+if$ -- 1277
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 9
+newline$ -- 107
+num.names$ -- 48
+pop$ -- 164
+preamble$ -- 1
+purify$ -- 85
+quote$ -- 0
+skip$ -- 223
+stack$ -- 0
+substring$ -- 378
+swap$ -- 73
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 166
+warning$ -- 5
+while$ -- 42
+width$ -- 0
+write$ -- 155
+(There were 5 warnings)
