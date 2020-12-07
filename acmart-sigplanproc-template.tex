@@ -188,7 +188,7 @@
 
 
 \section{Introduction and Motivation}
-CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python, JavaScript and more. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs.
+CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python, JavaScript and more. It can also be run on MacOS, Windows, and a variety of Linux distribuitions. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs.
 \newline
 \indent Existing tools leveraging CodeQL utilize text-based methods to display analysis results; this typically requires users to have some knowledge in program analysis to interpret. For example, LGTM has tools that make it easier to understand, and facilitate, data-flow analysis performed with CodeQL. The way they explore data-flow paths is with a series of code snippets. CodeQL for Visual Studio Code displays analysis results in a simple tabular view, not well-suited to exploring relationships between different result elements.
 \newline
@@ -337,6 +337,8 @@ CodeQLVis is the first visualization tool for CodeQL that does not rely on textu
 \end{figure}
 
 \indent Our visualization tool only supports taint-flow analysis. More specifically, it only supports taint-flow analysis driven by queries with a limited format. While we do pre-process queries to make modifications that help our visualization effort, this simply isn't sustainable over the limitless query formats users could use. We propose curating query templates in a similar format to those found on LGTM in order to limit the space of queries we have to deal with. This would also lay the groundwork to develop other categories of analysis that could receive visualization support. Graphing dead-code analysis, for example, could better contextualize those results.
+\newline
+\indent Our visualization tool currently utilizes straightforward graphs as a visualization tool. By using the backend we have made we can expand our frontend to offer a wider variety of visualization styles, each suited to more intuitively displaying difference aspects of a program. Offering more user-customization (such as support for different types of color blindness) for the visualization style is also desirable.
 
 \section{Related Work}
 There has been a wealth of work done in the space of visualizing data-flow analysis, which can be considered a superset of taint-flow analysis. There has been less work specifically on visualizing taint-flow, and none specifically in our area of interest. We highlight some efforts that have the most overlap with our project.
