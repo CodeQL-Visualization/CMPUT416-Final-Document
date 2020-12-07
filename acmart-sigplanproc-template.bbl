@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -79,6 +79,18 @@ Retrieved December 6, 2020 from \tempurl}
 \url{https://securitylab.github.com/tools/codeql}
 \showURL{%
 Retrieved December 6, 2020 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{GrammaTech}{GrammaTech}{2020}]%
+        {CodeSonar}
+\bibfield{author}{\bibinfo{person}{GrammaTech}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Static Analysis with CodeSonar}}.
+\newblock
+\urldef\tempurl%
+\url{https://www.grammatech.com/products/source-code-analysis}
+\showURL{%
+Retrieved December 7, 2020 from \tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Mysore, Mazloom, Agrawal, and Sherwood}{Mysore
