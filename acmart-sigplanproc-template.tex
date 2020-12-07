@@ -60,6 +60,9 @@
 \usepackage{subcaption} %% For complex figures with subfigures/subcaptions
                         %% http://ctan.org/pkg/subcaption
 
+%% For drawing graphs
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
 
 \begin{document}
 
@@ -233,10 +236,41 @@ Since the CodeQL for Visual Studio Code extension is open source, we created a f
 \section{Approach}
 
 \subsection{CodeQL Queries}
-\[TODO\] 
+Our approach is to make multiple CodeQL queries derived from the original query to get relevant information. It would be possible to accomplish this with a single query, but that would require modifying the CodeQL command line to get new information, thus reducing our compatability across different programming languages and operating systems. Using multiple queries instead maintains this compatability, at the cost of a small increase in runtime.
+\newline
+\indent We utilize existing CodeQL infrastructure from the CodeQL extension as much as we can. This also means that (with slightly more effort) we could incorperate CodeQLVis into existing CodeQL extension elements, such as query history. At the moment any queries we make with CodeQLVis can be recalled as CodeQL queries using the history manager, but we do cannot recall them to redisplay visualized queries.
+\newline
+\indent We will make at most three queries with the CodeQL command line for a given CodeQLVis visualization. The first will be the unmodified original query. If the original query had a sanitizer method we will make two additional queries modified from our original query: one where we remove the sanitization from our query, and one where we replace the sink detection in our query with what was formerly the sanitization detection. The first of these modified queries will tell us when we have sink nodes that would have been tainted, if not for the sanitization we have. The second of these modified queries tells us how far taint flows before being sanitized. Figure \ref{queries} shows the information the different queries find.
+\newline
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance = 1.5cm,on grid,auto]
+    \node[state] (s1) {$s_1$};
+    \node[state] (s2) [right = 2cm of s1] {$s_2$};
+    \node[] (v1) [below = 3cm of s1] {$\vdots$};
+    \node[] (u1) [below = of s2] {$\vdots$};
+    \node[state] (v2) [below = of u1] {$v$};
+    \node[] (u2) [below = of v2] {$\vdots$};
+    \node[state] (t1) [below = 6cm of s1] {$t_1$};
+    \node[state] (t2) [below = 6cm of s2] {$t_2$};
+    \path[->]
+    (s1) edge (v1)
+    (v1) edge [shorten <= 5pt] (t1)
+    (s2) edge (u1)
+    (u1) edge [shorten <= 5pt] (v2)
+    (v2) edge (u2)
+    (u2) edge [shorten <= 5pt] (t2)
+
+    ;
+  \end{tikzpicture}
+  \caption{TODO}
+  \label{queries}
+\end{figure}
 
 \subsection{Queries to Graphs}
-\[TODO\] 
+Once we have obtained information from our queries we can construct a graph that represents how taint flows. In the future, this graph can be adapted to various styles of visualization - the same underlying graph can be used to render different visualizations.
+\newline
+\indent To construct our graph we first add all of the results from our original query TODO. This represents when taint has flown from sources to sinks. If our modified queries have been made (i.e. the original query had a sanitizer method) we use our second query to find all paths from sources to sinks where taint could have flown undisrupted if not for our sanitization. Finally, we use our third query TODO to determine paths from sources to sanitizing nodes where taint has been blocked. This tells us how far taint flows on the paths provided by our second query. Combining the results from each of our queries we get a graph that has all paths where taint flows from sources to sinks, and all paths where taint would have flowed if not for sanitization, including how far the taint does flow. Of course, we combine nodes referencing the same locations in code so we may accurately depict cases such as when a source acts as a source of taint for distinct sources.
 
 \subsection{Rendering Results}
 The rendering part of the visualization tool is running on the Webview infrastructure of VS Code. The React.js framework is used to build the front-end of CodeQLVis. The TypeScript library hediet/visualization is used as the rendering infrastructure for the graphs. Websocket infrastructure enables the back-end to send analysis results to the front-end for rendering.
