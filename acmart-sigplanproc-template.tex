@@ -143,7 +143,7 @@
 %% Note: \begin{abstract}...\end{abstract} environment must come
 %% before \maketitle command
 \begin{abstract}
-CodeQL is a program analysis tool developed by Semmle. Developers and researchers can identify software vulnerabilities and bugs with CodeQL by writing queries in a language called QL. They have also developed a CodeQL Visual Studio Code extension, which is an open source project written in TypeScript, utilizing the CodeQL command line tool for the analysis service. This extension currently displays the analysis results in the tabular view. 
+CodeQL is a program analysis tool developed by Semmle. Developers and researchers can identify software vulnerabilities and bugs with CodeQL by writing queries in a language called QL. They have also developed CodeQL for Visual Studio Code, which is an open source Visual Studio Code extension written in TypeScript, utilizing CodeQL libraries for analysis. This extension currently displays the analysis results in the tabular view. 
 \newline
 \indent In this paper, we present CodeQLVis - a CodeQL visualization tool integrated in Visual Studio Code which creates intuitive graphical representations of the analysis results from CodeQL. 
 
@@ -210,19 +210,19 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 Our work is heavily dependent upon the static analysis tool CodeQL, as well as the framework for Visual Studio Code extensions. As such, we will provide a brief introduction to both of these to better contextualize our artifact.
 
 \subsection{CodeQL}
-CodeQL is a tool for performing static analysis that transforms code into queryable relational databases \cite{Semmle_CodeQL_About}. Database queries are then written in the CodeQL language to retrieve certain properties about the code that the database was derived from. This approach makes CodeQL incredibly fast, though the free-form nature of database queries means that it can be difficult to know exactly what format the data will have when retrieved.
+CodeQL is a tool for performing static analysis that transforms code into queryable relational databases \cite{Semmle_CodeQL_About}. Database queries are then written in the QL language to retrieve certain properties about the code that the database was derived from. This approach makes CodeQL incredibly fast, though the powerful and flexible nature of database queries means that it can be difficult to know exactly what data will have been retrieved and thus, how to visualize it, ahead of time.
 \newline
-\indent Two queries with the same semantic meaning can retrieve sets of data that are superficially different. As a result, there are efforts underway to produce libraries of pre-defined queries to help users look for common vulnerabilities or other issues in their code-base.
+\indent Two queries with the same semantic meaning can retrieve sets of data that are superficially different before processing or manual review. As a result, there are efforts underway to produce libraries of pre-defined queries to help users look for common security vulnerabilities or other issues in their code-base \cite{Semmle_LGTM}. The most-used source is LGTM, a service developed by Semmle and supported by GitHub Security Lab \cite{GitHub_SecurtyLab_CodeQL}.
 
 \subsection{Visual Studio Code Extensions}
 Visual Studio Code extensions are in-editor tools that are created by their community of users. Visual Studio Code, often abbreviated to VS Code, offers a powerful Extension API for this purpose. Extensions are written in JavaScript or TypeScript and can modify almost any aspect of VS Code. Features such us simple editor themes, all the way to adding support for self-developed programming languages is possible.
 \newline
-\indent Of particular interest for our purposes are VS Code Webviews. Where an extension that has been limited to the Extensions API are limited to modifying existing elements of the editor, the Webview API provides an opportunity to render interactive HTML in order to create entirely new functionality within the editor. CodeQL for Visual Studio Code, for example, uses this API to render query results tables.
+\indent Of particular interest for our purposes are VS Code Webviews. Where an extension that has been limited to the Extensions API are limited to modifying existing elements of the editor, the Webview API provides an opportunity to render interactive HTML in order to create entirely new functionality within the editor. CodeQL for Visual Studio Code, for example, uses this API to render query results as tables of data.
 
 \section{Overview}
-Thanks to the fact that CodeQL VSCode extension is open sourced, we built our visualization tool by extending this existing CodeQL extension. For the visualization part, we utilized the Webview APIs provided by VSCode and visualization libraries available for rendering the UI. 
+Since the CodeQL for Visual Studio Code extension is open source, we created a fork of the public repository in order to modify the extension such that graphical visualization would be possible. After completing a query, we pass processed data to a modified fork of a second open source extension, VS Code Debug Visualizer. This process relies on the VS Code Webview API and related libraries that drive graph visualization in that environment.
 \newline
-\indent CodeQLVis will be provided as an alternative to CodeQL VSCode extension's default way of rendering the results in tabular view. Users can easily switch between using the default or CodeQLVis. More details of the implementation of CodeQLVis will be described in the following section.
+\indent CodeQLVis is provided as supplemental functionality to the base CodeQL VS Code extension's default way of rendering the results in tabular view. Users select which functionality they would like to employ with simple context-menu options. Further implementation details follow.
 
 \begin{figure}[h]
   \centering
@@ -239,7 +239,11 @@ Thanks to the fact that CodeQL VSCode extension is open sourced, we built our vi
 \[TODO\] 
 
 \subsection{Rendering Results}
-The rendering part of the visualization tool is running on the Webview infrastructure of Visual Studio Code. We use React.js framework to build the front-end of CodeQLVis. TypeScript library hediet/visualization is used as the rendering infrastructure for the graphs. Websocket infrastructure enables the back-end to send analysis results to the front-end for rendering. 
+The rendering part of the visualization tool is running on the Webview infrastructure of VS Code. The React.js framework is used to build the front-end of CodeQLVis. The TypeScript library hediet/visualization is used as the rendering infrastructure for the graphs. Websocket infrastructure enables the back-end to send analysis results to the front-end for rendering.
+\newline
+\indent This functionality has been made available through the open source VS Code Debug Visualizer extension. Our modifications allowed us to control data-input from the CodeQL extension via a new extension command that take file-paths to JSON data as arguments. This JSON data is of the format outlined in the previous section.
+\newline
+\indent We have also written some support classes and modified existing classes to better represent our tool and provide a smooth in-editor user experience. These classes offer some control over the state of the extension, preventing the user from performing actions that may otherwise cause instability.
 
 \section{Evaluation}
 Due to the nature of this project, we only examined whether CodeQLVis generates correct taint-flow graphs. Therefore, we tested CodeQLVis with different code examples from the official CodeQL documentation and compared our taint-flow graphs with the CodeQL analysis results through manual inspections. In particular, we ask the following questions. 
@@ -267,20 +271,20 @@ CodeQLVis should display the nodes in the exact order in their taint-flow paths 
 \newline
 We observed no contradictions between our visualization graphs and CodeQL analysis results. 
 
-\section{Discussion and Future Work}
-CodeQLVis is the first visualization tool for CodeQL. It gives an intuitive way for understanding the analysis results generated by CodeQL. Also, it is integrated into Visual Studio Code so developers can benefit from this tool. 
+\section{Future Work}
+CodeQLVis is the first visualization tool for CodeQL that does not rely on textual or tabular representation. It provides intuitive means of understanding the analysis results generated by CodeQL. Also, it is integrated into the existing CodeQL for Visual Studio Code extension, so developers can benefit from this tool in conjunction with existing methods. However, we admit that this tool has room for a number of improvements and additional features. There is a large space of possibilities for future development efforts.
 \newline
-\indent However, we admit that this tool is not very complete limited by the time constraint and there is a huge space to improve. 
+\indent The graphs can be more interactive. Users should be able to navigate between the code snippets by clicking on the nodes on the visualization graphs. In addition, large graphs can become crowded due to the amount of information represented by labels on the nodes. We are of the opinion that interactive functionality, such as hover-text, could provide more complete information while keeping the nodes themselves small and concise. This, however, will only be achievable if the current visualization process is removed in favour of a more powerful, customizable, library. Should the visualization library be replaced, this would also open up opportunities for richer visualizations.
 \newline
-\indent The graphs can be more interactive. Users will be able to navigate between the code snippets by clicking on the nodes on the visualization graphs. Also, the styles of the visualization can be richer by replacing the current visualization library we are using by a more powerful one. At this moment, CodeQLVis only supports taint analysis. More data-flow analyses can be extended into CodeQLVis in the future. 
+\indent Our visualization tool only supports taint-flow analysis. More specifically, it only supports taint-flow analysis driven by queries with a limited format. While we do pre-process queries to make modifications that help our visualization effort, this simply isn't sustainable over the limitless query formats users could use. We propose curating query templates in a similar format to those found on LGTM in order to limit the space of queries we have to deal with. This would also lay the groundwork to develop other categories of analysis that could receive visualization support. Graphing dead-code analysis, for example, could better contextualize those results.
 
 \section{Related Work}
-\textcolor{red}{Probably get rid of the related tools bit. Everything we could say here fits better in the background. Expand Data Flow Visualization section such that each entry gets it's own bolded section.\newline}
+\textcolor{red}{Expand these entries and add new ones. \newline}
 There has been a wealth of work done in the space of visualizing data-flow analysis, which can be considered a superset of taint-flow analysis. There has been less work specifically on visualizing taint-flow, and none specifically in our area of interest. We highlight some efforts that have the most overlap with our project.
 \newline\newline
 \indent \textbf{"Understanding and Visualizing Full Systems with Data Flow Tomography"} \cite{10.1145/1353535.1346308} outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data-flow paths that meet certain pre-defined criteria.
 \newline\newline
-\indent \textbf {VisuFlow} \cite{10.1145/3183440.3183470} is a plugin developed for the Eclipse IDE that generates visualizations for static analysis performed by Soot. While similar to our approach, their plugin does not work with CodeQL queries, and was developed for a different IDE.
+\indent \textbf {VisuFlow} \cite{10.1145/3183440.3183470} is a plugin developed for Eclipse that generates visualizations for static analysis performed by Soot. While similar to our work, and interesting as a proof-of-concept, their plugin operates in a different context using a different engine for analysis.
 \[TODO\] 
 
 \section{Conclusion}
