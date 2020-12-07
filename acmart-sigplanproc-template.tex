@@ -332,7 +332,6 @@ CodeQLVis is the first visualization tool for CodeQL that does not rely on textu
 \indent Our visualization tool only supports taint-flow analysis. More specifically, it only supports taint-flow analysis driven by queries with a limited format. While we do pre-process queries to make modifications that help our visualization effort, this simply isn't sustainable over the limitless query formats users could use. We propose curating query templates in a similar format to those found on LGTM in order to limit the space of queries we have to deal with. This would also lay the groundwork to develop other categories of analysis that could receive visualization support. Graphing dead-code analysis, for example, could better contextualize those results.
 
 \section{Related Work}
-\textcolor{red}{Expand these entries and add new ones. \newline}
 There has been a wealth of work done in the space of visualizing data-flow analysis, which can be considered a superset of taint-flow analysis. There has been less work specifically on visualizing taint-flow, and none specifically in our area of interest. We highlight some efforts that have the most overlap with our project.
 \newline\newline
 \indent \textbf{"Understanding and Visualizing Full Systems with Data Flow Tomography"} \cite{10.1145/1353535.1346308} outlines an approach whereby data is tagged and tracked through the program to develop a visualzation of all interconnected pieces. In contrast, rather than doing live analysis, we use CodeQL to perform static analysis and find theoretical data-flow paths that meet certain pre-defined criteria.
@@ -342,12 +341,10 @@ There has been a wealth of work done in the space of visualizing data-flow analy
 \indent \textbf {CodeSonar} is a commercial program analysis tool developed by GrammaTech, Inc. It supports taint analysis visualization for serveral languages. It can be intergrated into Eclipse, IDEA and Android Studio IDE. However, this product is not free to use so we cannot make much comments on it.
 
 \section{Conclusion}
-\textcolor{red}{Expand this.\newline}
-We have shown a possible route to extend CodeQL for Visual Studio Code, offering a visual representation of data that is otherwise typically presented in tabular format. This optional visualization has been further broken down into different levels of granularity per a user's preference for a given query. Our approach leverages the source extension such that we can interpret taint-flow analysis queries of specific formats, subtly modifying queries before execution where necessary.
+We have shown a possible route to extend CodeQL for Visual Studio Code, offering a more intuitive and straightforward visual representation of data that is otherwise typically presented in tabular format. This optional visualization has been further broken down into different levels of granularity per a user's preference for a given query. Our approach leverages the source extension such that we can interpret taint-flow analysis queries of specific formats, subtly modifying queries before execution where necessary.
 \newline
 \indent
-This proof of concept shows promise; though, as we have discussed, the limitations are numerous and obvious at this stage. It is our opinion that it will be possible to refine our approach in order to make CodeQL more accessible and intuitive to use for developers regardless of their potential lack of foundational knowledge in static analysis.
-\[TODO\]
+CodeQLVis is presented as a proof-of-concept work rather than a perfect program analysis visualization tool. We believe there is a huge space for improvements in the future, such as supporting more program analysis visualizations, enabling more interactions between the developers and the graphs and making it more friendly for people without fundemental program analysis knowledge. 
 
 \bibliography{codeql-vis-refs}
 
