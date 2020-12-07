@@ -148,7 +148,7 @@
 \begin{abstract}
   CodeQL is a program analysis tool developed by Semmle. Developers and researchers can identify software vulnerabilities and bugs with CodeQL by writing queries in a language called QL. They have also developed CodeQL for Visual Studio Code, which is an open source Visual Studio Code extension written in TypeScript, utilizing CodeQL libraries for analysis. This extension currently displays the analysis results in the tabular view.
   \newline
-  \indent In this paper, we present CodeQLVis - a CodeQL visualization tool integrated in Visual Studio Code which creates intuitive graphical representations of the analysis results from CodeQL.
+  \indent In this paper, we present CodeQLVis - a visualization tool extending CodeQL for Visual Studio Code which creates intuitive graphical representations of taint-flow analysis results from CodeQL.
 
 \end{abstract}
 
@@ -190,7 +190,7 @@
 \section{Introduction and Motivation}
 CodeQL is a powerful code analysis engine that supports many mainstream programming languages such as Java, C\#, Python, JavaScript and more. Developers are able to use CodeQL to quickly perform data-flow analyses on their programs and identity software vulnerabilities such as taint flows, or to acquire programs' properties such as call graphs.
 \newline
-\indent Existing tools leveraging CodeQL on the market display the analysis results only in text-based methods, which is not very straightforward and requires users to have knowledge in program analysis to understand. For example, LGTM has tools that make it easier to understand data-flow analysis performed with CodeQL. The way they explore data-flow paths is with a series of code snippets. CodeQL Visual Studio Code extension only outputs the analysis results in tabular view.
+\indent Existing tools leveraging CodeQL utilize text-based methods to display analysis results; this typically requires users to have some knowledge in program analysis to interpret. For example, LGTM has tools that make it easier to understand, and facilitate, data-flow analysis performed with CodeQL. The way they explore data-flow paths is with a series of code snippets. CodeQL for Visual Studio Code displays analysis results in a simple tabular view, not well-suited to exploring relationships between different result elements.
 \newline
 \indent Semmle, the company behind CodeQL, was acquired by GitHub in 2019 and there has been widespread public support for CodeQL's novel approach to static analysis \cite{Semmle_GitHub}. The popularity of this tool, and the lack of visualization support, has given us reason to explore this problem. We've narrowed our scope in this domain to visualizing data-flow analysis, particularly as it pertains to taint-flow tracking.
 \newline
@@ -199,9 +199,9 @@ CodeQL is a powerful code analysis engine that supports many mainstream programm
 \section{Background}
 
 \subsection{CodeQL}
-CodeQL is a tool for performing static analysis that transforms code into queryable relational databases \cite{Semmle_CodeQL_About}. Database queries are then written in the QL language to retrieve certain properties about the code that the database was derived from. This approach makes CodeQL incredibly fast, though the powerful and flexible nature of database queries means that it can be difficult to know exactly what data will have been retrieved and thus, how to visualize it, ahead of time.
+CodeQL is a tool for performing static analysis that transforms code into queryable relational databases \cite{Semmle_CodeQL_About}. Database queries are then written in the QL language to retrieve certain properties about the code that the database was derived from. This approach makes CodeQL incredibly fast, though the powerful and flexible nature of database queries means that it can be difficult to know exactly what data will have been retrieved, and thus how to visualize it, ahead of time.
 \newline
-\indent Two queries with the same semantic meaning can retrieve sets of data that are superficially different before processing or manual review. As a result, there are efforts underway to produce libraries of pre-defined queries to help users look for common security vulnerabilities or other issues in their code-base \cite{Semmle_LGTM}. The most-used source is LGTM, a service developed by Semmle and supported by GitHub Security Lab \cite{GitHub_SecurtyLab_CodeQL}.
+\indent Two queries with the same semantic meaning can retrieve sets of data that are superficially different before processing or further manual review. As a result, there are efforts underway to produce libraries of pre-defined queries to help users look for common security vulnerabilities or other issues in their code-base \cite{Semmle_LGTM}. A popular source of such queries is LGTM, a service developed by Semmle and supported by GitHub Security Lab \cite{GitHub_SecurtyLab_CodeQL}.
 
 \subsection{Visual Studio Code Extensions}
 Visual Studio Code extensions are in-editor tools that are created by their community of users. Visual Studio Code, often abbreviated to VS Code, offers a powerful Extension API for this purpose. Extensions are written in JavaScript or TypeScript and can modify almost any aspect of VS Code. Features such us simple editor themes, all the way to adding support for self-developed programming languages is possible.
@@ -230,9 +230,9 @@ Since the CodeQL for Visual Studio Code extension is open source, we created a f
 \section{Approach}
 
 \subsection{CodeQL Queries}
-Our approach is to make multiple CodeQL queries derived from the original query to get relevant information. It would be possible to accomplish this with a single query, but that would require modifying the CodeQL command line to get new information, thus reducing our compatability across different programming languages and operating systems. Using multiple queries instead maintains this compatability, at the cost of a small increase in runtime.
+Our approach is to make multiple CodeQL queries derived from the original query to get relevant information. It would be possible to accomplish this with a single query, but that would require modifying the CodeQL command line to get new information, thus reducing compatibility across different programming languages and operating systems. Using multiple queries instead maintains this compatibility, at the cost of a small increase in runtime.
 \newline
-\indent We utilize existing CodeQL infrastructure from the CodeQL extension as much as we can. This also means that (with slightly more effort) we could incorperate CodeQLVis into existing CodeQL extension elements, such as query history. At the moment any queries we make with CodeQLVis can be recalled as CodeQL queries using the history manager, but we do cannot recall them to redisplay visualized queries.
+\indent We utilize existing CodeQL infrastructure from the CodeQL extension as much as we can. This also means that (with slightly more effort) we could incorporate CodeQLVis into existing CodeQL extension elements, such as query history. At the moment any queries we make with CodeQLVis can be recalled as CodeQL queries using the history manager, but we do cannot recall them to redisplay visualized queries.
 \newline
 \indent We will make at most three queries with the CodeQL command line for a given CodeQLVis visualization. The first will be the unmodified original query. If the original query had a sanitizer method we will make two additional queries modified from our original query: one where we remove the sanitization from our query, and one where we replace the sink detection in our query with what was formerly the sanitization detection. The first of these modified queries will tell us when we have sink nodes that would have been tainted, if not for the sanitization we have. The second of these modified queries tells us how far taint flows before being sanitized. Figure \ref{queries} shows the information the different queries find.
 \newline
@@ -351,7 +351,7 @@ There has been a wealth of work done in the space of visualizing data-flow analy
 We have shown a possible route to extend CodeQL for Visual Studio Code, offering a more intuitive and straightforward visual representation of data that is otherwise typically presented in tabular format. This optional visualization has been further broken down into different levels of granularity per a user's preference for a given query. Our approach leverages the source extension such that we can interpret taint-flow analysis queries of specific formats, subtly modifying queries before execution where necessary.
 \newline
 \indent
-CodeQLVis is presented as a proof-of-concept work rather than a perfect program analysis visualization tool. We believe there is a huge space for improvements in the future, such as supporting more program analysis visualizations, enabling more interactions between the developers and the graphs and making it more friendly for people without fundemental program analysis knowledge. 
+CodeQLVis is presented as a proof-of-concept work rather than a perfect program analysis visualization tool. We believe there is a huge space for improvements in the future, such as supporting more program analysis visualizations, enabling more interactions between the developers and the graphs and making it more friendly for people without fundamental program analysis knowledge. 
 
 \bibliography{codeql-vis-refs}
 
